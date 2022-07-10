@@ -1,4 +1,4 @@
-# bookstagram
+# bookstagram <-- Desktop Version Only -->
 A flask machine learning (book recommendation) web app / Todo App
 
 ### . A web app that performs books recommendation using the nearest neighbors algorithm
