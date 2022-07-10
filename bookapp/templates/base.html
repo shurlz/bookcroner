@@ -1,0 +1,31 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='Style.css')}}">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+        <div class="navbar">
+            <div class="navbar-logo"><span>BooKSTAgRAM</span></div>
+            {% if current_user.is_authenticated %}
+                <div class="navbar-login"><a href="{{ url_for('logout') }}"><span>Log Out</span></a></div>
+            {% else %}
+                <div class="navbar-login"><a href="{{ url_for('login') }}"><span>Sign In</span></a></div>
+            {% endif %}
+        </div>
+    </head>
+    <body>
+        
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="{{category}}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        {% block content %}
+
+        {% endblock %}
+    </body>
+</html>

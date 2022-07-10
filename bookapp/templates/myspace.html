@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="all-myspace-contents">
+    <form action="" method="post">
+        {{ create.submit(class='submit-query') }}
+    </form>
+   
+    {% if form %}
+        <div class="create-update-form">
+            <form action="" method="post">
+                {{ form.hidden_tag() }}
+
+                {{ form.book_name(placeholder='book name',class='todo-form-core-name') }}
+                <br>
+                {{ form.message(placeholder='Description', class='todo-form-core-description') }}
+                <br>
+                <div>
+                    <div>
+                        {{ form.start_time(placeholder="start date '2000-10-12' ", class='todo-form-core-time') }}
+                    </div>
+                    <div>
+                        {{ form.end_time(placeholder="end date '2004-10-12' ", class='todo-form-core-time') }}
+                    </div>
+                </div>
+                <br>
+                {{ form.submit(class='submit-query') }}
+                <br>
+            </form>
+        </div>
+    {% endif %}
+
+    {% if user_info %}
+        {% for info in user_info %}
+            <div class="my-books">
+                <span class="book-name">{{ info.book_name }}</span>
+                <br>
+                <div class="message"><i>{{ info.message }}</i></div>
+                <div class="time-components">
+                    <div><b>start</b> : {{ calculator.time_split(info.start_time) }}</div>
+                    <div>{{ calculator.date_distance( info.end_time, info.start_time ) }}</div>
+                    <div><b>ends</b> : {{ calculator.time_split(info.end_time) }}</div>
+                </div>
+                <div class="advance-components">
+                    <div><a href="{{  url_for('update' , post_id = info.id )}}">{{ edit.submit(class='submit-query') }}</a></div>
+                    <div><a href="{{  url_for('delete' , post_id = info.id )}}">{{ delete.submit(class='submit-query') }}</a></div>
+                </div>
+            </div>
+            <br>
+        {% endfor %}
+    {% endif %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="sigin-page">
+    <form action="" method="post">
+        {{ form.hidden_tag() }}
+        <p class="p">SIGN UP</p>
+        <div>
+            <div class="identifier">Email-Address:</div>
+            {{ form.email_address(placeholder='JaneDoe55@gmail.com', class='login-inputs') }}
+        </div>
+        
+        <div>
+            <div class="identifier">Password:</div>
+            {{ form.password(placeholder='password', class='login-inputs') }}
+        </div>
+        
+        <div>
+            <div class="identifier">Confirm Password:</div>
+            {{ form.confirm_password(placeholder='confirm password', class='login-inputs') }}
+        </div>
+
+        {{ form.submit(class='submit-query') }}
+    </form>
+</div>
+
+{% endblock %}

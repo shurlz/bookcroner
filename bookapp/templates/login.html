@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="sigin-page">
+    <p class="p">SIGN IN</p>
+    <a href="{{ url_for('google_login') }}">
+        <img src="{{ url_for ('static' , filename='sign_in_with_google.png') }}" >
+    </a>
+    
+    <p>- or -</p>
+    <form action="" method="post">
+        {{ form.hidden_tag() }}
+        <div>
+            <div class="identifier">Email:</div>
+            {{ form.email(placeholder='Email address' , class='login-inputs') }}
+        </div>
+        <div>
+            <div class="identifier">Password:</div>
+            {{ form.password(placeholder='Password' , class='login-inputs') }}
+        </div>
+        <div>
+            <span>Remember me ? {{ form.remember_me() }}</span>
+        </div>
+        {{ form.submit( class='submit-query') }}
+    </form>
+    <p>Don't have an account ? <a href="{{ url_for('signup') }}">sign up..</a></p>
+</div>
+
+{% endblock %}

@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="home-text"><i>"What book should I read next ?.."</i></div>
+    <div>
+        <div class="search">
+            <form method="post">
+                {{ form.hidden_tag() }}
+        
+                {{ form.query_item( placeholder="Enter keyword eg 'harry' ", class='input-query' ) }}
+            
+                {{ form.submit(class='submit-query') }}
+            </form>
+        </div>
+        
+        {% if  possible_books %}
+            {% for book in possible_books %}
+                <div class="possible-books">
+                    <span>{{ book.books }}</span> 
+                    <a href="{{url_for('recommend' , bookname=book.books )}}">
+                        <button type="submit">confirm</button>
+                    </a>
+                </div>  
+                <br>
+            {% endfor %}
+        {% endif %}
+
+        {% if recommendation %}
+            <div class="all-recommendations">
+                {% for book in recommendation %}
+                    <div class="recommended-book">
+                        <img src="{{ book[1] }}" alt="{{ book[0] }} ">
+                        <i>{{ book[0] }}</i>
+                        <div>
+                            <a href="https://www.amazon.com/s?k={{book[0]}}&i=stripbooks-intl-ship&crid=G9H18LIVUUKZ&sprefix={{book[0]}}%2Cstripbooks-intl-ship%2C445&ref=nb_sb_noss_2">
+                                <button>Buy</button>
+                            </a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+    <div class="section-two">
+        <div class="inner-elements">
+            <img src="{{ url_for('static' , filename='machine.jpg') }}">
+            <div>
+                A Machine learning recommendation engine with <b>1000+</b> books option. Kickstart your next 
+                reading experience within seconds....
+                <div>
+                    <a href="{{ url_for('home') }}"><button class="submit-query" type="submit">Get Started</button></a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="inner-elements">
+            <img src="{{ url_for('static' , filename='todo.jpg') }}">
+            <div>
+                Having difficulty keeping track of your reading progress? Login to get Started using the Todo feature
+                with time tracker.
+                <div>
+                    <a href="{{ url_for('signup') }}"><button class="submit-query" type="submit">Sign Up</button></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="inner-elements">
+            <img src="{{ url_for('static' , filename='code.jpg') }}">
+            <div>
+                Flask, NearestNeighbors, SQLAlchemy, Pandas, HTML, CSS, Seaborn...
+                <br>
+                View Github repository.
+                <div>
+                    <a href="https://github.com/shurlz/bookcroner"><button class="submit-query" type="submit">Github</button></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <h3>MOST SEARCHED BOOKS</h3>
+    <div class="canvas-space">
+        <canvas id="myChart" class="canvas"></canvas>
+        <script>
+            var xValues = ['{{ top_eight[0][0][:25] }}', '{{ top_eight[1][0][:25] }}', '{{ top_eight[2][0][:25] }}',
+                            '{{ top_eight[3][0][:25] }}', '{{ top_eight[4][0][:25] }}','{{ top_eight[5][0][:25] }}',
+                            '{{ top_eight[6][0][:25] }}','{{ top_eight[7][0][:25] }}'];
+
+            var yValues = ['{{ top_eight[0][1] }}','{{ top_eight[1][1] }}', '{{ top_eight[2][1] }}',
+                            '{{ top_eight[3][1] }}', '{{ top_eight[4][1] }}','{{ top_eight[5][1] }}',
+                            '{{ top_eight[6][1] }}','{{ top_eight[7][1] }}'];
+            
+            var colors = ['black','blue','black','blue','black','blue','black','blue']
+
+            new Chart("myChart", {
+            type: "bar",
+            data: {
+                labels: xValues,
+                datasets: [{
+                backgroundColor: colors,
+                data: yValues
+                }]
+            },
+            options: {
+                legend: {display: false},
+                title: {
+                display: true,
+                text: "MOST SEARCHED BOOKS"
+                }
+            }
+        });
+        </script>
+    </div>
+    <footer><b>Created by <a href="https://github.com/shurlz/"><i>@John</i></a></b></footer>
+{% endblock %}
