@@ -19,6 +19,6 @@ A flask machine learning (book recommendation) web app / Todo App
 ##### ![6](https://user-images.githubusercontent.com/73120937/178148167-07a66fa0-a6d3-4a85-857d-994d74d2f3d9.png)
 
 ### frontend : Chart JS, HTML, CSS
-### backend : Flask, SQLite(postgres for Heroku), Heroku
+### backend : Flask, Flask-SQLAlchemy(postgres for Heroku), Heroku
 ### other techs : Sklearn , Pandas
 
